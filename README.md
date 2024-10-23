@@ -44,7 +44,7 @@ Background job started: [1] 2118414 program1 &
 ### 2. Jobs
 
 jobs - Should print all of the currently running background processes in the format: "[JOBID] PID COMMAND" where JOBID is a unique positive integer quash assigns to the job to identify it, PID is the PID of the child process used for the job, and COMMAND is the command used to invoke the job.
-Expected output:
+#### Expected output:
 ```
 [QUASH]$ find -type f | grep '*.c' > out.txt &
 Background job started: [1] 2342 find / -type f | grep '*.c' > out.txt &
@@ -57,6 +57,11 @@ Background job started: [2] 2343 sleep 15 &
 To start a background job:
 ```sh
 [QUASH-@directory]$ find -type f | grep '*.c' > out.txt &
+```
+`grep '*.c'` will look for the literal string *.c in the file paths, rather than treating *.c as a wildcard pattern.
+Use `grep '\.c$'` instead, which uses a regular expression to match any line ending with .c.:
+```sh
+find -type f | grep '\.c$' > out.txt &
 ```
 This background job will finish if you start a second background job:
 ```sh
