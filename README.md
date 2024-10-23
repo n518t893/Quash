@@ -29,19 +29,29 @@ Make sure the executable file is in the directories listed in the `PATH` environ
 
 ```sh
 export PATH=$PATH:/home/username/Downloads/quash_project/
+```
 Second, check execute permissions (example for program1):
+```sh
 ls -l program1
 chmod +x program1
+```
 Now run Quash and it should work as intended:
+```sh
 [QUASH-@directory]$ program1 &
 Background job started: [1] 2118414 program1 &
 [QUASH-@directory]$ Hello, World!
-2. Jobs
+```
+### 2. Jobs
 To start a background job:
+```sh
 [QUASH-@directory]$ find -type f | grep '*.c' > out.txt &
+```
 This background job will finish if you start a second background job:
+```sh
 [QUASH-@directory]$ sleep 15 &
+```
 Test the jobs command by executing different jobs:
+```sh
 [QUASH-@directory]$ sleep 15 &
 Background job started: [1] 2120155 sleep 15 &
 [QUASH-@directory]$ sleep 15 &
@@ -49,3 +59,4 @@ Background job started: [2] 2120156 sleep 15 &
 [QUASH-@directory]$ jobs
 [1] 2120155 sleep 15 &
 [2] 2120156 sleep 15 &
+```
