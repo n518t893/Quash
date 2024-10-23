@@ -40,22 +40,7 @@ static QuashState initial_state() {
 static void print_prompt() {
   bool should_free = true;
   char* cwd = get_current_directory(&should_free);
-
   assert(cwd != NULL);
-
-  char hostname[HOST_NAME_MAX];
-
-  // Get the hostname
-  gethostname(hostname, HOST_NAME_MAX);
-
-  // Remove first period and everything afterwards
-  for (int i = 0; hostname[i] != '\0'; ++i) {
-    if (hostname[i] == '.') {
-      hostname[i] = '\0';
-      break;
-    }
-  }
-
   char* last_dir = cwd;
   // Show only last directory
   for (int i = 0; cwd[i] != '\0'; ++i) {
@@ -63,14 +48,9 @@ static void print_prompt() {
       last_dir = cwd + i + 1;
     }
   }
-
-  char* username = getlogin();
-
   // print the prompt
-  printf("[QUASH - %s@%s %s]$ ", username, hostname, last_dir);
-
+  printf("[QUASH - @%s]$ ", last_dir);
   fflush(stdout);
-
   if (should_free)
     free(cwd);
 }
